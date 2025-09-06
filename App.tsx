@@ -88,6 +88,7 @@ export default function App() {
                     scene_number: scene.scene_number,
                     imageUrl: `data:image/png;base64,${sceneImageBase64}`,
                     description: scene.description,
+                    conversation: scene.conversation,
                 }]);
 
                 generatedImagesBase64.push(sceneImageBase64);
@@ -133,7 +134,7 @@ export default function App() {
         setLoadingMessage('Cloning voice and adding narration...');
         setError(null);
         try {
-            const narration = await cloneVoiceAndNarrate(blob, storyScript?.map(s => s.description).join(' ') ?? '');
+            const narration = await cloneVoiceAndNarrate(blob, storyScript?.map(s => s.conversation).join(' ') ?? '');
             setNarrationUrl(narration);
             await handleGenerateVideo(); 
         } catch(err) {
@@ -234,9 +235,14 @@ export default function App() {
                 {storyScript && (
                     <div className="mt-8 bg-white p-6 rounded-2xl shadow-lg">
                         <h3 className="text-xl font-bold text-gray-700 mb-4">Generated Story Script</h3>
-                        <ul className="space-y-2 text-gray-600">
+                        <ul className="space-y-4 text-gray-600">
                            {storyScript.map(scene => (
-                               <li key={scene.scene_number}><strong>Scene {scene.scene_number}:</strong> {scene.description}</li>
+                               <li key={scene.scene_number}>
+                                   <p><strong>Scene {scene.scene_number}:</strong> {scene.description}</p>
+                                   <blockquote className="mt-1 pl-4 border-l-4 border-violet-200 text-violet-800 italic">
+                                       {scene.conversation}
+                                   </blockquote>
+                               </li>
                            ))}
                         </ul>
                     </div>

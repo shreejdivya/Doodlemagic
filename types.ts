@@ -4,6 +4,7 @@ export interface StoryScene {
   description: string;
   camera_shot: string;
   apparels: string;
+  conversation: string;
 }
 
 export type StoryScript = StoryScene[];
@@ -12,6 +13,7 @@ export interface GeneratedScene {
     scene_number: number;
     imageUrl: string;
     description: string;
+    conversation: string;
 }
 
 export enum AppStep {

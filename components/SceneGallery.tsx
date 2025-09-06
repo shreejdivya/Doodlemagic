@@ -20,6 +20,9 @@ const SceneGallery: React.FC<SceneGalleryProps> = ({ scenes }) => {
                     <div className="p-4">
                         <p className="text-sm font-bold text-violet-600">Scene {scene.scene_number}</p>
                         <p className="text-gray-600 mt-1 text-sm">{scene.description}</p>
+                        <blockquote className="mt-2 p-2 border-l-4 border-violet-100 bg-violet-50 text-violet-800 text-sm italic">
+                            "{scene.conversation}"
+                        </blockquote>
                     </div>
                 </div>
             ))}

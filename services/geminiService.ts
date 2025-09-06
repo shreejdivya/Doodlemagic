@@ -15,7 +15,7 @@ export const generateStoryFromDrawing = async (imageBase64: string): Promise<Sto
                     },
                 },
                 {
-                    text: `Analyze this child's drawing. Generate a short, 3-scene story script with continuity from scene to scene for a 30-second video based on the main elements in the drawing. The story should be magical, adventurous, and suitable for a young child. Provide the output as a JSON array.`,
+                    text: `Analyze this child's drawing. Generate a short, 3-scene conversational story script with continuity from scene to scene for a 30-second video based on the main elements in the drawing. The story should be magical, adventurous, cinematic and suitable for a young child. For each scene, include a short line of conversation or a sound effect. Provide the output as a JSON array.`,
                 },
             ],
         },
@@ -42,8 +42,12 @@ export const generateStoryFromDrawing = async (imageBase64: string): Promise<Sto
                             type: Type.STRING,
                             description: "The apparels should be consistent in all the scenes",
                         },
+                        conversation: {
+                            type: Type.STRING,
+                            description: "A short line of dialogue or a sound effect for the scene.",
+                        },
                     },
-                    required: ["scene_number", "description", "camera_shot", "apparels"],
+                    required: ["scene_number", "description", "camera_shot", "apparels", "conversation"],
                 },
             },
         },
@@ -63,7 +67,7 @@ export const generateSceneImage = async (
     scene: StoryScene,
     referenceImageBase64: string,
 ): Promise<string> => {
-    const prompt = `Create a scene for a story. The scene depicts: '${scene.description}'. The main character is based on the person in the reference image. Maintain the character's appearance (facial features, hair, skin tone, and clothing specified in apparels) from the reference image. Apparels: "${scene.apparels}". Camera shot: "${scene.camera_shot}".`;
+    const prompt = `Create a scene for a cinematic story. The scene depicts: '${scene.description}'. The main character is based on the person in the reference image. Apparels: "${scene.apparels}". Camera shot: "${scene.camera_shot}".`;
 
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash-image-preview',
