@@ -16,7 +16,7 @@ export const generateStoryFromDrawing = async (imageBase64: string, mimeType: st
                     },
                 },
                 {
-                    text: `Analyze this child's drawing. Generate a short, 4-scene conversational story script for a 8-second video, a short, catchy title, and a separate, single-paragraph "video prompt" for a text-to-video AI model. The story script must be magical, adventurous, cinematic, and strictly suitable for a young child. The "video prompt" should be a vivid, highly-detailed, and cinematic description of the entire story arc, suitable for an adult-facing video generation model. It should focus on visual elements, camera movements (like 'dynamic drone shot', 'close-up'), and overall mood, while avoiding words like "child", "kid", or "toddler". It must also include the dialogue from the 'conversation' field for each scene, enclosed in double quotes. For each scene in the script, include a short line of conversation or a sound effect, and a short, simple, rhyming stanza (2-4 lines) that poetically describes the scene for a child to read in a storybook. Provide the entire output as a single JSON object.`,
+                    text: `Analyze this child's drawing. Generate a short, 4-scene conversational story script for a 8-second video, a short, catchy title, and a separate, single-paragraph "video prompt" for a text-to-video AI model. The story script must be magical, adventurous, cinematic, and strictly suitable for a young child. The "video prompt" should be a vivid, highly-detailed, and cinematic description of the entire story arc, suitable for an adult-facing video generation model. It should focus on visual elements, camera movements (like 'dynamic drone shot', 'close-up'), and overall mood, while avoiding words like "child", "kid", or "toddler". It must also include the dialogue from the 'conversation' field for each scene, enclosed in double quotes. For each scene in the script, include a short line of conversation, and Write a 2–4 line rhyming stanza for children. It must rhyme and sound playful, while referring to the scene in a fun, imaginative way. Focus on rhyme first, then fit in the scene details. Provide the entire output as a single JSON object.`,
                 },
             ],
         },
@@ -49,7 +49,7 @@ export const generateStoryFromDrawing = async (imageBase64: string, mimeType: st
                                 },
                                 rhyming_stanza: {
                                     type: Type.STRING,
-                                    description: "A short, 2-4 line rhyming stanza describing the scene poetically for a child.",
+                                    description: "A short rhyming stanza, 2–4 lines long, playful and imaginative, written for children. It must rhyme and can loosely reference the scene without just describing it.",
                                 },
                                 camera_shot: {
                                     type: Type.STRING,
@@ -61,7 +61,7 @@ export const generateStoryFromDrawing = async (imageBase64: string, mimeType: st
                                 },
                                 conversation: {
                                     type: Type.STRING,
-                                    description: "A short line of dialogue or a sound effect for the scene.",
+                                    description: "A short line of dialogue for the scene.",
                                 },
                             },
                             required: ["scene_number", "description", "rhyming_stanza", "camera_shot", "apparels", "conversation"],
