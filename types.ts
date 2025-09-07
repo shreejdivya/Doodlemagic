@@ -1,4 +1,3 @@
-
 export interface StoryScene {
   scene_number: number;
   description: string;
@@ -20,8 +19,6 @@ export enum AppStep {
   DRAWING = 'DRAWING',
   PHOTO = 'PHOTO',
   SCENES = 'SCENES',
-  VOICE = 'VOICE',
-  VIDEO = 'VIDEO',
   FINALE = 'FINALE',
 }
 

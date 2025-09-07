@@ -1,7 +1,5 @@
 {
   "name": "Doodlemagic",
   "description": "A progressive web app that transforms children’s drawings into personalized animated stories with their own voice and likeness.",
-  "requestFramePermissions": [
-    "microphone"
-  ]
+  "requestFramePermissions": []
 }
