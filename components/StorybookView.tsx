@@ -62,7 +62,7 @@ const StorybookView: React.FC<StorybookViewProps> = ({ scenes, title }) => {
                                 />
                             </div>
                             <div className="flex flex-col justify-center">
-                                <p className="text-gray-700 text-lg mb-4">{scene.description}</p>
+                                <p className="text-gray-700 text-lg mb-4 whitespace-pre-line italic font-serif">{scene.rhyming_stanza}</p>
                                 <blockquote className="p-3 border-l-4 border-violet-200 bg-violet-50 text-violet-800 text-lg italic rounded-r-lg">
                                     "{scene.conversation}"
                                 </blockquote>

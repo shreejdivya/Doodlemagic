@@ -1,6 +1,7 @@
 export interface StoryScene {
   scene_number: number;
   description: string;
+  rhyming_stanza: string;
   camera_shot: string;
   apparels: string;
   conversation: string;
@@ -12,6 +13,7 @@ export interface GeneratedScene {
     scene_number: number;
     imageUrl: string;
     description: string;
+    rhyming_stanza: string;
     conversation: string;
 }
 

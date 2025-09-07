@@ -120,6 +120,7 @@ export default function App() {
                     scene_number: scene.scene_number,
                     imageUrl: `data:${sceneMimeType};base64,${sceneImageBase64}`,
                     description: scene.description,
+                    rhyming_stanza: scene.rhyming_stanza,
                     conversation: scene.conversation,
                 };
                 newScenes.push(newScene);
@@ -190,6 +191,14 @@ export default function App() {
                         <h2 className="text-2xl font-bold text-gray-700 mb-4">Your Doodlemagic Story!</h2>
                         <p className="text-gray-500 mb-6">Here is your animated story. We hope you love it!</p>
                         {silentVideoUrl && <VideoPlayer videoUrl={silentVideoUrl} autoPlay={true} loop={true} />}
+                        
+                        <div className="mt-10 p-6 bg-violet-50 rounded-xl shadow-inner border border-violet-100">
+                            <h3 className="text-xl font-bold text-violet-700 mb-2">Coming Soon!</h3>
+                            <p className="text-gray-600">
+                                Get ready for even more magic! We're working on features like swapping your child's photo and even cloning their voice to narrate the story — turning it into a truly personal keepsake.
+                            </p>
+                        </div>
+
                         <button onClick={() => window.location.reload()} className="mt-8 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-violet-500 hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 transition-transform transform hover:scale-105">
                            <SparklesIcon className="h-5 w-5 mr-2" /> Create Another Story
                         </button>

@@ -15,7 +15,7 @@ export const generateStoryFromDrawing = async (imageBase64: string, mimeType: st
                     },
                 },
                 {
-                    text: `Analyze this child's drawing. Generate a short, 2-scene conversational story script for a 30-second video, a short, catchy title, and a separate, single-paragraph "video prompt" for a text-to-video AI model. The story script must be magical, adventurous, cinematic, and strictly suitable for a young child. The "video prompt" should be a vivid, highly-detailed, and cinematic description of the entire story arc, suitable for an adult-facing video generation model. It should focus on visual elements, camera movements (like 'dynamic drone shot', 'close-up'), and overall mood, while avoiding words like "child", "kid", or "toddler". For each scene in the script, include a short line of conversation or a sound effect. Provide the entire output as a single JSON object.`,
+                    text: `Analyze this child's drawing. Generate a short, 4-scene conversational story script for a 8-second video, a short, catchy title, and a separate, single-paragraph "video prompt" for a text-to-video AI model. The story script must be magical, adventurous, cinematic, and strictly suitable for a young child. The "video prompt" should be a vivid, highly-detailed, and cinematic description of the entire story arc, suitable for an adult-facing video generation model. It should focus on visual elements, camera movements (like 'dynamic drone shot', 'close-up'), and overall mood, while avoiding words like "child", "kid", or "toddler". It must also include the dialogue from the 'conversation' field for each scene, enclosed in double quotes. For each scene in the script, include a short line of conversation or a sound effect, and a short, simple, rhyming stanza (2-4 lines) that poetically describes the scene for a child to read in a storybook. Provide the entire output as a single JSON object.`,
                 },
             ],
         },
@@ -46,6 +46,10 @@ export const generateStoryFromDrawing = async (imageBase64: string, mimeType: st
                                     type: Type.STRING,
                                     description: "A detailed one-sentence description of the action and setting in this scene.",
                                 },
+                                rhyming_stanza: {
+                                    type: Type.STRING,
+                                    description: "A short, 2-4 line rhyming stanza describing the scene poetically for a child.",
+                                },
                                 camera_shot: {
                                     type: Type.STRING,
                                     description: "A simple camera instruction, e.g., 'Wide shot', 'Close-up on character'.",
@@ -59,7 +63,7 @@ export const generateStoryFromDrawing = async (imageBase64: string, mimeType: st
                                     description: "A short line of dialogue or a sound effect for the scene.",
                                 },
                             },
-                            required: ["scene_number", "description", "camera_shot", "apparels", "conversation"],
+                            required: ["scene_number", "description", "rhyming_stanza", "camera_shot", "apparels", "conversation"],
                         },
                     }
                 },
@@ -83,7 +87,10 @@ export const generateSceneImage = async (
     referenceImageBase64: string,
     referenceImageMimeType: string,
 ): Promise<{ imageBase64: string; mimeType: string }> => {
-    const prompt = `Create a scene for a cinematic story. The scene depicts: '${scene.description}'. The main character is based on the person in the reference image. should use the same face, skin tone. Apparels: "${scene.apparels}". Camera shot: "${scene.camera_shot}".`;
+    const prompt = `Create a cinematic scene. The scene should depict: ${scene.description}.
+    The main character must be based on the person in the reference image — use the same face and skin tone to ensure consistency. Keep the character’s body features unchanged.
+    Clothing/Apparel: ${scene.apparels}.
+    Camera shot/angle: ${scene.camera_shot}.`;
 
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash-image-preview',
