@@ -1,7 +1,8 @@
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 import { StoryScene, StoryScript, GeneratedScene } from "../types";
+const genApiKey = process.env.API_KEY as string;
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+const ai = new GoogleGenAI({ apiKey: genApiKey });
 
 export const generateStoryFromDrawing = async (imageBase64: string, mimeType: string): Promise<{ title: string; script: StoryScript; videoPrompt: string; }> => {
     const response = await ai.models.generateContent({
@@ -173,12 +174,11 @@ export const generateVideoFromScenes = async (
         throw new Error("Video generation succeeded but no download link was provided.");
     }
 
-    const apiKey = process.env.API_KEY;
-    if (!apiKey) {
+    if (!genApiKey) {
       throw new Error("API_KEY environment variable not set.");
     }
 
-    const response = await fetch(`${downloadLink}&key=${apiKey}`);
+    const response = await fetch(`${downloadLink}&key=${genApiKey}`);
     if (!response.ok) {
         throw new Error(`Failed to download video file. Status: ${response.status}`);
     }
